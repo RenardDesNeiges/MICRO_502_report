@@ -22,31 +22,49 @@
 
 \section{Introduction}
 
+
+
 \subsection{Presentation of the Crazyflie platform}
 
 \subsection{Problem statement and discussion of possible pitfalls}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/arch_provisoire.png}
+    \includegraphics[width=0.8\textwidth]{figures/crazyfly_objective_figure.png}
+    \caption{Schematic representation of the flight area.}
+\end{figure}
+
+\section{General presentation of our solution}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/arch_provisoire.png}
     \caption{Schematic representation of the hybrid architecture.}
     %% Schematic copied from "A hybrid control architecture for autonomous mobile robot navigation in unknown dynamic environment" Nakhaeinia et al. 2015 and modified a bit
 \end{figure}
 
-
-\section{General presentation of our solution}
-
 Our software implements a hybrid-deliberative architecture that can be split into three main components :
 \begin{enumerate}
-    \item An off-board deliberative \textit{supervisor} that maintains a world model (a map) and ensures the planning of actions
-    \item An off-board reactive \textit{controller} that performs navigation tasks (such as take-off, landing and waypoint navigation) while ensuring some guarantees (such as obstacle avoidance)
-    \item An on-board control system and state estimator that handles control of the robot
+    \item an off-board deliberative \textit{supervisor} that maintains a world model (a map) and ensures the planning of actions,
+    \item an off-board reactive \textit{controller} that performs navigation tasks (such as take-off, landing and waypoint navigation) while ensuring some guarantees (such as obstacle avoidance),
+    \item an on-board control system and state estimator that handles control of the robot.
 \end{enumerate}
 
 
 \section{Global navigation and supervisor agent}
 
-In the following section we present the design of the deliberative agent that acts as a
+In the following section we present the design of the deliberative agent that handles path planning and mission planning. We call mission planning ensuring that the robot achieves its specified goals (in our case taking off platform $A$, flying and landing on platform $B$ and going back to platform $A$). Our supervisor agent can be split up into two main components : 
+\begin{enumerate}
+    \item a mission-planner finite state machine that handles mission planning,
+    \item a path planner component that handles global navigation and implements two distinct path planning algorithms : 
+    \begin{enumerate}
+        \item an online shortest path path planing algorithm,
+        \item an online coverage path planing algorithm.
+    \end{enumerate}
+\end{enumerate}
+
+Those different components are described separately in the section below.
+
 
 \subsection{Mission-planner finite state machine}
 
