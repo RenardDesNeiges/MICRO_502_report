@@ -38,20 +38,19 @@
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/arch_provisoire.png}
-    \caption{Schematic representation of the hybrid architecture. \textbf{TODO : make my own figure}}
-    %% Schematic copied from "A hybrid control architecture for autonomous mobile robot navigation in unknown dynamic environment" Nakhaeinia et al. 2015 and modified a bit
+    \includegraphics[width=0.7\textwidth]{figures/arch.png}
+    \caption{Schematic representation of the hybrid architecture.}
 \end{figure}
 
 Our software implements a hybrid-deliberative architecture that can be split into three main components :
 \begin{enumerate}
     \item an off-board deliberative \textit{supervisor} that maintains a world model (a map) and ensures the planning of actions,
-    \item an off-board reactive \textit{controller} that performs navigation tasks (such as take-off, landing and waypoint navigation) while ensuring some guarantees (such as obstacle avoidance),
+    \item an off-board low level \textit{controller} that performs navigation tasks (such as take-off, landing and waypoint navigation).
     \item an on-board control system and state estimator that handles control of the robot.
 \end{enumerate}
 
 
-\section{Global navigation and supervisor agent}
+\section{World model and path planning}
 
 In the following section we present the design of the deliberative agent that handles path planning and mission planning. We call mission planning ensuring that the robot achieves its specified goals (in our case taking off platform $A$, flying and landing on platform $B$ and going back to platform $A$). Our supervisor agent can be split up into two main components : 
 \begin{enumerate}
@@ -63,7 +62,7 @@ In the following section we present the design of the deliberative agent that ha
     \end{enumerate}
 \end{enumerate}
 
-Those different components are described separately in the section below.
+Both path planning algorithms rely on a global nav that is updated in realtime according to the sensor values. Those different components are described separately in the section below.
 
 
 \subsection{Mission-planner finite state machine}
@@ -77,6 +76,12 @@ Those different components are described separately in the section below.
 \subsection{Coverage path planning}
 
 \cite{epsilon_star} \cite{Galceran13asurvey} \cite{recsplit}
+
+\section{Low level navigation}
+
+\section{Results}
+
+\section{Conclusion}
 
 \tableofcontents
 
